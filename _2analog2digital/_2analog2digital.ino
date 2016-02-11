@@ -53,20 +53,20 @@ void loop() {
   int buttonStateRed = digitalRead(pushButtonRed);
   int buttonStateOff = digitalRead(pushButtonOff);
   // print out the state of the button:
-//    Serial.println("buttonStateRed");
-//    Serial.println(buttonStateRed);
-//    Serial.println("buttonStateOff");
-//    Serial.println(buttonStateOff);
+    Serial.println("buttonStateRed");
+    Serial.println(buttonStateRed);
+    Serial.println("buttonStateOff");
+    Serial.println(buttonStateOff);
 
    
 
   //JOYSTICK
   int xPos = map(analogRead(xPin), 0, 1023, -255, 255); 
-//  Serial.print(xPos);
-//  Serial.print("\n");
+  Serial.print(xPos);
+  Serial.print("\n");
   int yPos = map(analogRead(yPin), 0, 1023, -255, 255); 
-//  Serial.print(yPos);
-//  Serial.print("\n");
+  Serial.print(yPos);
+  Serial.print("\n");
 //
 //   analogWrite(RED_PIN, xPos);
 //   analogWrite(BLUE_PIN, yPos);
