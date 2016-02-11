@@ -62,9 +62,11 @@ void loop() {
 
   //JOYSTICK
   int xPos = map(analogRead(xPin), 0, 1023, -255, 255); 
+  Serial.print("xPos");
   Serial.print(xPos);
   Serial.print("\n");
   int yPos = map(analogRead(yPin), 0, 1023, -255, 255); 
+  Serial.print("yPos");
   Serial.print(yPos);
   Serial.print("\n");
 //
