@@ -95,7 +95,7 @@ int baseline = 0;
 int timer = 0;
 
 //SMOOTHING
-const int numReadings = 30;
+const int numReadings = 50;
 
 int readings[numReadings];      // the readings from the analog input
 int readIndex = 0;              // the index of the current reading
@@ -103,6 +103,8 @@ int total = 0;                  // the running total
 int average = 0;                // the average
 
 int mapping =0;
+
+int score = 0;
 
 
 // ================================================================
@@ -295,14 +297,21 @@ void loop() {
 
 
       timer ++;
-       if(timer == 300){
+       if(timer == 500){
               baseline = average;
               //Serial.print("BASELINE***************************");
               Serial.println(average);
               }
+
+         
               
              // mapping = map(average, -1000, 1000, 0, 500);
              // Serial.println(mapping);
+
+
+      if(timer > 500){
+        getScore();
+        }
               
         #endif
 
@@ -315,3 +324,44 @@ void loop() {
      
 
 }
+
+
+void getScore(){
+   int change = abs(average)-baseline;
+   
+//  if (change <= 10){
+//    score = score +1;
+//    }
+   if (change <= 20 && change >= 10){
+    score = score +2;
+    }
+   else if (change <= 30 && change >= 20){
+    score = score +3;
+    }
+   else if (change <= 40 && change >= 30){
+    score = score +4;
+    }
+    else if (change <= 50 && change >= 40){
+    score = score +5;
+    }
+    else if (change <= 60 && change >= 50){
+    score = score +6;
+    }
+    else if (change <= 70 && change >= 60){
+    score = score +7;
+    }
+    else if (change <= 80 && change >= 70){
+    score = score +8;
+    }
+    else if (change <= 90 && change >= 80){
+    score = score +9;
+    }
+    else if (change > 100){
+    score = score +10;
+    }
+
+    Serial.println("Score*************");
+    Serial.println(score);
+
+    
+  }
