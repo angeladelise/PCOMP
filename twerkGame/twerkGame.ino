@@ -138,7 +138,9 @@ void setup() {
     // initialize serial communication
     // (115200 chosen because it is required for Teapot Demo output, but it's
     // really up to you depending on your project)
-    Serial.begin(250000); //baud rate
+
+    
+    Serial.begin(38400); //baud rate
     while (!Serial); // wait for Leonardo enumeration, others continue immediately
 
     // NOTE: 8MHz or slower host processors, like the Teensy @ 3.3v or Ardunio
@@ -297,7 +299,7 @@ void loop() {
 
 
       timer ++;
-       if(timer == 500){
+       if(timer == 400){
               baseline = average;
               //Serial.print("BASELINE***************************");
               Serial.println(average);
@@ -309,7 +311,7 @@ void loop() {
              // Serial.println(mapping);
 
 
-      if(timer > 500){
+      if(timer > 400){
         getScore();
         }
               
