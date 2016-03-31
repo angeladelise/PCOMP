@@ -93,13 +93,10 @@ uint8_t teapotPacket[14] = { '$', 0x02, 0,0, 0,0, 0,0, 0,0, 0x00, 0x00, '\r', '\
 
 int baseline = 0;
 
-const int counter = 300;
+const int counter = 120;
 int baselineArray[counter];
 int baselineTotal =0;
-//int getBaseline = 0;
-
-int runTime= 0;
-const int runOnce =0;
+int getBaseline = 0;
 
 
 //SMOOTHING
@@ -217,6 +214,7 @@ void setup() {
     readings[thisReading] = 0;
      }
 
+     
 
 }
 
@@ -276,14 +274,6 @@ void loop() {
             Serial.println(ypr[2] * 180/M_PI);
 
 
- //CALL BASELINE FUNCTION
-    // if (runTime == runOnce){
-   //  getBaseline();
-   //  while(1);
-     //runTime ++;
-     //}
-     
-
               // subtract the last reading:
               total = total - readings[readIndex];
               // read from the sensor:
@@ -302,20 +292,14 @@ void loop() {
               // calculate the average:
               average = total / numReadings;
               // send it to the computer as ASCII digits
-//              Serial.print("\n");
-//              Serial.print("\n");
-//              Serial.print("Average:");
-//              Serial.println(average);
+            
+            Serial.print("\n");             
+            Serial.print("\n");             
+            Serial.print("Average:");              
+            Serial.println(average);
             
              // mapping = map(average, -1000, 1000, 0, 500);
              // Serial.println(mapping);
-
-
-             if(millis() == 300){
-              baseline = average;
-              Serial.println("BASELINEEEEEE********");
-              Serial.println(baseline);
-              }
               
         #endif
 
@@ -328,30 +312,3 @@ void loop() {
      
 
 }
-
-
-//void getBaseline(){
-//
-////FOR BASELINE!!!!!!
-//     for (int thisCounter = 0; thisCounter < counter; thisCounter++) {
-//    baselineArray[thisCounter] = 0;
-//     
-//      //counter ++;
-//       // subtract the last reading:
-//              baselineTotal = baselineTotal - baselineArray[thisCounter];
-//              // read from the sensor:
-//              baselineArray[thisCounter] = (ypr[2] * 180/M_PI);
-//              // add the reading to the total:
-//              baselineTotal = baselineTotal + baselineArray[thisCounter];
-//              // advance to the next position in the array:
-//              thisCounter ++;   
-//     Serial.println("Baseline!!!");
-//
-//        if (thisCounter == counter-1) {
-//              baseline = baselineTotal/ counter;
-//              Serial.println("Baseline!!!******************");
-//               Serial.println(baseline);
-//                }
-//     }
-//
-//}
