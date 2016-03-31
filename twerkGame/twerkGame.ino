@@ -316,9 +316,9 @@ void loop() {
         #endif
 
 
-        // blink LED to indicate activity
-        blinkState = !blinkState;
-        digitalWrite(LED_PIN, blinkState);
+      // blink LED to indicate activity
+      //  blinkState = !blinkState;
+      //  digitalWrite(LED_PIN, blinkState);
     }
 
      
