@@ -95,7 +95,7 @@ int baseline = 0;
 int timer = 0;
 
 //SMOOTHING
-const int numReadings = 50;
+const int numReadings = 40;
 
 int readings[numReadings];      // the readings from the analog input
 int readIndex = 0;              // the index of the current reading
@@ -264,11 +264,11 @@ void loop() {
             mpu.dmpGetGravity(&gravity, &q);
             mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
            // Serial.print("ypr\t");
-            Serial.print(ypr[0] * 180/M_PI);
-            Serial.print("\t");
-            Serial.print(ypr[1] * 180/M_PI);
-            Serial.print("\t");
-            Serial.println(ypr[2] * 180/M_PI);
+//            Serial.print(ypr[0] * 180/M_PI);
+//            Serial.print("\t");
+//            Serial.print(ypr[1] * 180/M_PI);
+//            Serial.print("\t");
+//            Serial.println(ypr[2] * 180/M_PI);
 
 
               // subtract the last reading:
@@ -290,10 +290,10 @@ void loop() {
               average = total / numReadings;
               // send it to the computer as ASCII digits
             
-            Serial.print("\n");             
-            Serial.print("\n");             
-            Serial.print("Average:");              
-            Serial.println(average);
+//            Serial.print("\n");             
+//            Serial.print("\n");             
+//            Serial.print("Average:");              
+//            Serial.println(average);
 
 
       timer ++;
@@ -360,7 +360,7 @@ void getScore(){
     score = score +10;
     }
 
-    Serial.println("Score*************");
+    //Serial.println("Score*************");
     Serial.println(score);
 
     
