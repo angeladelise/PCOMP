@@ -92,12 +92,7 @@ uint8_t teapotPacket[14] = { '$', 0x02, 0,0, 0,0, 0,0, 0,0, 0x00, 0x00, '\r', '\
 //BASELINE!!!
 
 int baseline = 0;
-
-const int counter = 120;
-int baselineArray[counter];
-int baselineTotal =0;
-int getBaseline = 0;
-
+int timer = 0;
 
 //SMOOTHING
 const int numReadings = 30;
@@ -297,7 +292,15 @@ void loop() {
             Serial.print("\n");             
             Serial.print("Average:");              
             Serial.println(average);
-            
+
+
+      timer ++;
+       if(timer == 300){
+              baseline = average;
+              //Serial.print("BASELINE***************************");
+              Serial.println(average);
+              }
+              
              // mapping = map(average, -1000, 1000, 0, 500);
              // Serial.println(mapping);
               
