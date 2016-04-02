@@ -104,7 +104,7 @@ int average = 0;                // the average
 
 int mapping =0;
 
-int score = 0;
+float score = 0;
 
 
 // ================================================================
@@ -140,7 +140,7 @@ void setup() {
     // really up to you depending on your project)
 
     
-    Serial.begin(38400); //baud rate
+    Serial.begin(9600); //baud rate
     while (!Serial); // wait for Leonardo enumeration, others continue immediately
 
     // NOTE: 8MHz or slower host processors, like the Teensy @ 3.3v or Ardunio
@@ -182,16 +182,16 @@ void setup() {
     // make sure it worked (returns 0 if so)
     if (devStatus == 0) {
         // turn on the DMP, now that it's ready
-        Serial.println(F("Enabling DMP..."));
+    //    Serial.println(F("Enabling DMP..."));
         mpu.setDMPEnabled(true);
 
         // enable Arduino interrupt detection
-        Serial.println(F("Enabling interrupt detection (Arduino external interrupt 0)..."));
+   //     Serial.println(F("Enabling interrupt detection (Arduino external interrupt 0)..."));
         attachInterrupt(0, dmpDataReady, RISING);
         mpuIntStatus = mpu.getIntStatus();
 
         // set our DMP Ready flag so the main loop() function knows it's okay to use it
-        Serial.println(F("DMP ready! Waiting for first interrupt..."));
+   //     Serial.println(F("DMP ready! Waiting for first interrupt..."));
         dmpReady = true;
 
         // get expected DMP packet size for later comparison
@@ -213,7 +213,7 @@ void setup() {
     readings[thisReading] = 0;
      }
 
-     
+    score = 0;     
 
 }
 
@@ -295,13 +295,13 @@ void loop() {
 //            Serial.print("\n");             
 //            Serial.print("\n");             
 //            Serial.print("Average:");              
-//            Serial.println(average);
+//           Serial.println(average);
 
 
       timer ++;
-       if(timer == 500){
+       if(timer == 600){
               baseline = average;
-              //Serial.print("BASELINE***************************");
+              Serial.print("BASELINE***************************");
               Serial.println(average);
               }
 
@@ -311,7 +311,7 @@ void loop() {
              // Serial.println(mapping);
 
 
-      if(timer > 500){
+      if(timer > 600){
         getScore();
         }
               
@@ -334,32 +334,32 @@ void getScore(){
 //  if (change <= 10){
 //    score = score +1;
 //    }
-   if (change <= 20 && change >= 10){
-    score = score +2;
+   if (change <= 20 && change >= 15){
+    score = score +.2;
     }
    else if (change <= 30 && change >= 20){
-    score = score +3;
+    score = score +.3;
     }
    else if (change <= 40 && change >= 30){
-    score = score +4;
+    score = score +.4;
     }
     else if (change <= 50 && change >= 40){
-    score = score +5;
+    score = score +.5;
     }
     else if (change <= 60 && change >= 50){
-    score = score +6;
+    score = score +.6;
     }
     else if (change <= 70 && change >= 60){
-    score = score +7;
+    score = score +.7;
     }
     else if (change <= 80 && change >= 70){
-    score = score +8;
+    score = score +.8;
     }
     else if (change <= 90 && change >= 80){
-    score = score +9;
+    score = score +.9;
     }
     else if (change > 100){
-    score = score +10;
+    score = score +1;
     }
 
     //Serial.println("Score*************");
