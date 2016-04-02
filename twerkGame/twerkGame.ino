@@ -299,7 +299,7 @@ void loop() {
 
 
       timer ++;
-       if(timer == 400){
+       if(timer == 500){
               baseline = average;
               //Serial.print("BASELINE***************************");
               Serial.println(average);
@@ -311,7 +311,7 @@ void loop() {
              // Serial.println(mapping);
 
 
-      if(timer > 400){
+      if(timer > 500){
         getScore();
         }
               
