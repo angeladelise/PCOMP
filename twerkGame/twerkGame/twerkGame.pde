@@ -8,17 +8,6 @@ float num;
 String averageIn;
 float average;
 
-String yawIn;
-String pitchIn;
-String rollIn;
-
-float yaw;
-float pitch;
-float roll;
-
-int count;
-int imageCount;
-
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
@@ -45,6 +34,18 @@ int timer = 0;
 
 PImage title;
 PImage state2;
+PImage state3;
+PImage state4;
+
+PImage oneD;
+PImage miley;
+PImage rihanna;
+PImage beyonce;
+PImage nicki;
+
+int count = 1800;
+int countDown;
+
 
 void setup() {
  //port = new Serial(this, "/dev/cu.usbmodem1421", 250000);
@@ -70,16 +71,35 @@ void setup() {
   
   title = loadImage("twerk.png");
   state2 = loadImage("twerk2.png");
+  state3 = loadImage("twerk3.png");
+  state4 = loadImage("twerk4.png");
+  
+  oneD = loadImage("oneDirection.png");
+  miley = loadImage("mileyC.png");
+  rihanna = loadImage("rihannaC.png");
+  beyonce = loadImage("beyonceC.png");
+  nicki = loadImage("nickiMinaj.png");
+  
+  frameRate(30);
+
 }
 
 void draw() {
     background(0);
     
+    if(port.available()>0){
+    
+    averageIn = port.readStringUntil('\n');
+    }
+    
     if(state == 1){
     //title screen
     image(title, 0,0);
+
     if(mousePressed == true){
         state = 2;
+        timer = 0;
+        count = 1800;
         }
     }
     
@@ -157,33 +177,33 @@ void draw() {
     
 //STATE 3
   if(state == 3){
-    if(port.available()>0){
-    //pressed = port.readStringUntil('\t');
+    image(state3, 0, 0);
     
-    //yawIn = port.readStringUntil('\t');
-    //pitchIn = port.readStringUntil('\t');
-    //rollIn = port.readStringUntil('\n');
+    countDown = count/30;
     
-    averageIn = port.readStringUntil('\n');
-    }
+    
     
     if(averageIn != null){
       average = float(averageIn);
       
-      
+      fill(200, 100, 50);
+      textSize(100);
+      text(countDown, width/2 + 300, height/2 + 200);
+      count --;
     
     }
     
    
     println("average" + average);
 
-  // println("yaw" + yaw);
-  //  println("pitch" + pitch);
-  //  println("roll" + roll);
     
     if(average > 10){
-      fill(255,0,0);
-      rect(50, height-50, 100, height- average);
+      fill(240,100,0);
+      rect(width/2 - 200, height-50, 100, height- average);
+    }
+    
+    if(count == 0){
+      state = 4;
     }
     
   } // end of state 3
@@ -191,7 +211,37 @@ void draw() {
  //STATE 4
  if (state == 4){
    //print results
- 
+   image(state4, 0, 0);
+   
+   //one direction
+   if(average < 300){
+   image(oneD, 0, height/2 - 150);
+   }
+   
+   //miley
+   if(average >= 300 && average < 400){
+    image(miley, 0, height/2 - 150);
+   }
+   
+   //rihana
+   if(average >= 400 && average < 500){
+    image(rihanna, 0, height/2 - 150);
+   }
+   
+   //beyonce
+   if(average >= 500 && average < 600){
+    image(beyonce, 0, height/2 - 200);
+   }
+   
+   //nicki
+   if(average >= 600){
+   image(nicki, 0, height/2 - 150);
+   }
+   
+   if(mousePressed && mouseX> 320 && mouseX < 720 && mouseY > 540 && mouseY < 640){
+       state = 1;
+       }
+   
  }
  
 

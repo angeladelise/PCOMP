@@ -331,9 +331,9 @@ void loop() {
 void getScore(){
    int change = abs(average)-baseline;
    
-//  if (change <= 10){
-//    score = score +1;
-//    }
+  if (change >10 && change < 15){
+    score = score +1;
+    }
    if (change <= 20 && change >= 15){
     score = score +.2;
     }
