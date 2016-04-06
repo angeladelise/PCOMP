@@ -59,7 +59,6 @@ int countDown;
 
 
 void setup() {
- //port = new Serial(this, "/dev/cu.usbmodem1421", 250000);
   port = new Serial(this, "/dev/cu.usbmodem1421", 9600);
   port.bufferUntil('\n');
   
@@ -111,9 +110,9 @@ void draw() {
     
     averageIn = port.readStringUntil('\n');
     }
-    
+   
+//STATE 0 IS TITLE SCREEN
     if(state == 0){
-    //title screen
     image(title, 0,0);
 
     if(mousePressed == true){
@@ -123,32 +122,15 @@ void draw() {
         }
     }
     
- //STATE 1
+ //STATE 1 IS ONE LIST OF SONGS
      if(state == 1){
      timer++;
       image(state1, 0,0);
       
-     //if(keyReleased() && timer >30){
-     // if (key == CODED) {
-     //   if (keyCode == LEFT || keyCode == RIGHT) {
-     //      state = 2;
-     //     } 
-     //    }
-     // }
      
      keyReleased();
       
-      //ARROWS
-      if(mousePressed && mouseX > 950 && mouseX < 990 && mouseY > 400 && mouseY < 505 && timer >30){
-      state = 2;
-      }
-      if(mousePressed && mouseX > 20 && mouseX < 60 && mouseY > 400 && mouseY < 505 && timer >30){
-      state = 2;
-      }
       
-      //if(mousePressed && 
-      
-      //println(mouseX, mouseY);
       
       println(state);
       
@@ -176,20 +158,13 @@ void draw() {
      }
    }//end of state 1
     
-    
+ //STATE 2 IS SECOND LIST OF SONGS
     if(state == 2){
      timer++;
       image(state2, 0,0);
       
       keyReleased();
       
-      //ARROWS
-      if(mousePressed && mouseX > 950 && mouseX < 990 && mouseY > 400 && mouseY < 505 && timer >30){
-      state = 1;
-      }
-      if(mousePressed && mouseX > 20 && mouseX < 60 && mouseY > 400 && mouseY < 505 && timer >30){
-      state = 1;
-      }
       
      //choose a song
      if (timer > 30){
@@ -215,10 +190,7 @@ void draw() {
      }
    }//end of state 2
      
-     //println("X");
-     //println(mouseX);
-     //println("Y");
-     //println(mouseY);
+ 
 
 //CONTROLS WHICH SONGS ARE PLAYING
     if(s1 == true){
@@ -360,7 +332,7 @@ void draw() {
     song7.pause();
     }
     
-//STATE 3
+//STATE 3 IS GAME STATE
   if(state == 3){
     image(state3, 0, 0);
     
@@ -397,7 +369,7 @@ void draw() {
     
   } // end of state 3
   
- //STATE 4
+ //STATE 4 IS RESULTS
  if (state == 4){
    //print results
    image(state4, 0, 0);
