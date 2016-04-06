@@ -56,7 +56,7 @@ PImage nicki;
 
 int count = 1800;
 int countDown;
-
+int continueCount;
 
 void setup() {
   port = new Serial(this, "/dev/cu.usbmodem1421", 9600);
@@ -119,6 +119,7 @@ void draw() {
         state = 1;
         timer = 0;
         count = 1800;
+        continueCount = 0;
         }
     }
     
@@ -340,15 +341,15 @@ void draw() {
     
     
     
-    if(averageIn != null){
-      
-      fill(200, 100, 50);
-      textSize(100);
-      text(countDown, width/2 + 300, height/2 + 200);
-      count --;
-    
+    if(averageIn != null && average < 10){
+      continueCount = 1;
+      countDown();
+ 
     }
     
+    if(continueCount == 1){
+      countDown();
+    }
    
     println("average" + average);
 
@@ -356,11 +357,18 @@ void draw() {
     if(average > 10){
       fill(240,100,0);
       rectMode(CORNERS);
-      rect(width/2 - 50, height-50, width/2 - 200, height-50-average/2);
       
+      float rectHeightMath = height-50-average/3;
+      float rectHeight = rectHeightMath;
+      rect(width/2 - 50, height-50, width/2 - 200, rectHeight);
       
-      //rect(width/2 - 200, height-50, 100, height-50-average);
+       if (rectHeightMath >= 750){
+        rectHeight = 750;
+      }
+      
     }
+    
+   
     
     if(count == 0){
       state = 4;
@@ -399,7 +407,7 @@ void draw() {
    }
    
    if(mousePressed && mouseX> 320 && mouseX < 720 && mouseY > 540 && mouseY < 640){
-       state = 1;
+       state = 0;
        }
    
  }
@@ -431,4 +439,11 @@ void keyReleased(){
 void serialEvent(Serial p) { 
   averageIn = p.readString(); 
   average = float(averageIn);
+}
+
+void countDown(){
+      fill(200, 100, 50);
+      textSize(100);
+      text(countDown, width/2 + 300, height/2 + 200);
+      count --;
 }
