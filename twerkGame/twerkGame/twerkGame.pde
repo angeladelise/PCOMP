@@ -106,10 +106,10 @@ void setup() {
 void draw() {
     background(0);
     
-    if(port.available()>0){
+    //if(port.available()>0){
     
-    averageIn = port.readStringUntil('\n');
-    }
+    //averageIn = port.readStringUntil('\n');
+    //}
    
 //STATE 0 IS TITLE SCREEN
     if(state == 0){
@@ -341,7 +341,6 @@ void draw() {
     
     
     if(averageIn != null){
-      average = float(averageIn);
       
       fill(200, 100, 50);
       textSize(100);
@@ -426,4 +425,10 @@ void keyReleased(){
            }     
     }
   }
+}
+
+
+void serialEvent(Serial p) { 
+  averageIn = p.readString(); 
+  average = float(averageIn);
 }
