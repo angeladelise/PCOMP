@@ -78,7 +78,7 @@ int baseline2 = 0;
 int timer = 0;
 
 //SMOOTHING
-const int numReadings = 40;
+const int numReadings = 50;
 
 //FOR GYRO 1
 int readings[numReadings];      // the readings from the analog input
@@ -102,6 +102,7 @@ void setup() {
     // join I2C bus (I2Cdev library doesn't do this automatically)
     #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
         Wire.begin();
+        TWBR = 24; // 400kHz I2C clock (200kHz if CPU is 8MHz)
     #elif I2CDEV_IMPLEMENTATION == I2CDEV_BUILTIN_FASTWIRE
         Fastwire::setup(400, true);
     #endif
@@ -109,12 +110,12 @@ void setup() {
     // initialize serial communication
     // (38400 chosen because it works as well at 8MHz as it does at 16MHz, but
     // it's really up to you depending on your project)
-    Serial.begin(38400);
+    Serial.begin(9600);
 
     // initialize device
     Serial.println("Initializing I2C devices...");
     accelgyro.initialize();
-     accelgyro1.initialize();
+    accelgyro1.initialize();
 
     // verify connection
     Serial.println("Testing device connections...");
@@ -152,6 +153,12 @@ void setup() {
      }
 
     score = 0; 
+
+    for (int thisReading2 = 0; thisReading2 < numReadings; thisReading2++) {
+    readings2[thisReading2] = 0;
+     }
+
+    score2 = 0; 
     
 }
 
@@ -234,12 +241,15 @@ void loop() {
 
       if(timer > 600){
         getScore();
+        getScore2();
         }
 
 
-        Serial.print(average);
-        Serial.print("\t");
-        Serial.println(average2);
+//PRINT OUT VALUES FOR EACH PLAYER!
+
+       // Serial.print(average);
+       // Serial.print("\t");
+       // Serial.println(average2);
        // Serial.println("  ");
 
         
@@ -264,13 +274,13 @@ void loop() {
 }
 
 
-
+//FOR PLAYER ONE
 void getScore(){
    int change = abs(average)-baseline;
    
-  if (change >10 && change < 15){
-    score = score +.1;
-    }
+//  if (change >10 && change < 15){
+//    score = score +.1;
+//    }
    if (change <= 20 && change >= 15){
     score = score +.2;
     }
@@ -299,8 +309,49 @@ void getScore(){
     score = score +1;
     }
 
-    //Serial.println("Score*************");
-  //  Serial.println(score);
+  Serial.println("Score*************");
+  Serial.println(score);
+
+    
+  }
+
+//FOR PLAYER TWO
+  void getScore2(){
+   int change2 = abs(average2)-baseline2;
+   
+//  if (change2 >10 && change2 < 15){
+//    score2 = score2 +.1;
+//    }
+   if (change2 <= 20 && change2 >= 15){
+    score2 = score2 +.2;
+    }
+   else if (change2 <= 30 && change2 >= 20){
+    score2 = score2 +.3;
+    }
+   else if (change2 <= 40 && change2 >= 30){
+    score2 = score2 +.4;
+    }
+    else if (change2 <= 50 && change2 >= 40){
+    score2 = score2 +.5;
+    }
+    else if (change2 <= 60 && change2 >= 50){
+    score2 = score2 +.6;
+    }
+    else if (change2 <= 70 && change2 >= 60){
+    score2 = score2 +.7;
+    }
+    else if (change2 <= 80 && change2 >= 70){
+    score2 = score2 +.8;
+    }
+    else if (change2 <= 90 && change2 >= 80){
+    score2 = score2 +.9;
+    }
+    else if (change2 > 100){
+    score2 = score2 +1;
+    }
+
+    Serial.println("score2*************");
+   Serial.println(score2);
 
     
   }
