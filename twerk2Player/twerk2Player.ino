@@ -113,14 +113,14 @@ void setup() {
     Serial.begin(9600);
 
     // initialize device
-    Serial.println("Initializing I2C devices...");
+   // Serial.println("Initializing I2C devices...");
     accelgyro.initialize();
     accelgyro1.initialize();
 
     // verify connection
-    Serial.println("Testing device connections...");
-    Serial.println(accelgyro.testConnection() ? "MPU6050 connection successful" : "MPU6050 connection failed");
-    Serial.println(accelgyro1.testConnection() ? "MPU6050 connection successful" : "MPU6050 connection failed");
+//    Serial.println("Testing device connections...");
+//    Serial.println(accelgyro.testConnection() ? "MPU6050 connection successful" : "MPU6050 connection failed");
+//    Serial.println(accelgyro1.testConnection() ? "MPU6050 connection successful" : "MPU6050 connection failed");
 
     // use the code below to change accel/gyro offset values
     /*
@@ -159,6 +159,8 @@ void setup() {
      }
 
     score2 = 0; 
+
+    timer =0;
     
 }
 
@@ -229,6 +231,7 @@ void loop() {
         average2 = total2 / numReadings;
 
         timer ++;
+        
        if(timer == 600){
         baseline = average;
         Serial.print("BASELINE*************FOR PLAYER ONE");
@@ -244,6 +247,9 @@ void loop() {
         getScore2();
         }
 
+      Serial.print("time");
+      Serial.println(timer);
+      
 
 //PRINT OUT VALUES FOR EACH PLAYER!
 
@@ -276,7 +282,7 @@ void loop() {
 
 //FOR PLAYER ONE
 void getScore(){
-   int change = abs(average)-baseline;
+   int change = average-baseline;
    
 //  if (change >10 && change < 15){
 //    score = score +.1;
@@ -317,7 +323,7 @@ void getScore(){
 
 //FOR PLAYER TWO
   void getScore2(){
-   int change2 = abs(average2)-baseline2;
+   int change2 = average2-baseline2;
    
 //  if (change2 >10 && change2 < 15){
 //    score2 = score2 +.1;
