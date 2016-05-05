@@ -126,7 +126,7 @@ void draw() {
     //}
    
    
-   println(mouseX, mouseY);
+   //println(mouseX, mouseY);
    
 //STATE 0 IS TITLE SCREEN
     if(state == 0){
@@ -381,15 +381,15 @@ void draw() {
       countDown();
     }
    
-   // println("player1" + player1);
-   // println("player2" + player2);
+   println("player1" + player1);
+   println("player2" + player2);
 
     //green player
     if(player1 > 10){
       fill(40,250,93);
       rectMode(CORNERS);
       
-      float rectHeightMath = height-50-player1/3;
+      float rectHeightMath = height-50-player1/4;
       float rectHeight = rectHeightMath;
       rect(width/2 - 150, height-50, width/2 - 300, rectHeight);
       
@@ -404,7 +404,7 @@ void draw() {
       fill(240,70,240);
       rectMode(CORNERS);
       
-      float rectHeightMath2 = height-50-player2/3;
+      float rectHeightMath2 = height-50-player2/4;
       float rectHeight2 = rectHeightMath2;
       rect(width/2 + 150, height-50, width/2 + 300, rectHeight2);
       

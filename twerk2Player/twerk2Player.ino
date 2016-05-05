@@ -232,7 +232,7 @@ void loop() {
 
         timer ++;
         
-       if(timer == 600){
+       if(timer == 1000){
         baseline = average;
         Serial.print("BASELINE*************FOR PLAYER ONE");
         Serial.println(average);
@@ -242,7 +242,7 @@ void loop() {
         Serial.println(average2);
         }
 
-      if(timer > 600){
+      if(timer > 1000){
         getScore();
         getScore2();
         }
