@@ -5,6 +5,10 @@ Serial port;
 String pressed;
 float num;
 
+String data [] = new String [2];
+int num1, num2;
+boolean isNum1 = true;
+
 String player1In;
 float player1;
 
@@ -136,7 +140,7 @@ void draw() {
       
       
       
-      println(state);
+      //println(state);
       
      //choose a song
      if (timer > 30){
@@ -354,8 +358,8 @@ void draw() {
       countDown();
     }
    
-    println("player1" + player1);
-    println("player2" + player2);
+   // println("player1" + player1);
+   // println("player2" + player2);
 
     
     if(player1 > 10){
@@ -364,7 +368,7 @@ void draw() {
       
       float rectHeightMath = height-50-player1/3;
       float rectHeight = rectHeightMath;
-      rect(width/2 - 200, height-50, width/2 - 200, rectHeight);
+      rect(width/2 - 150, height-50, width/2 - 300, rectHeight);
       
        if (rectHeightMath >= 750){
         rectHeight = 750;
@@ -378,7 +382,7 @@ void draw() {
       
       float rectHeightMath2 = height-50-player2/3;
       float rectHeight2 = rectHeightMath2;
-      rect(width/2, height-50, width/2 - 200, rectHeight2);
+      rect(width/2 + 150, height-50, width/2 + 300, rectHeight2);
       
        if (rectHeightMath2 >= 750){
         rectHeight2 = 750;
@@ -455,11 +459,75 @@ void keyReleased(){
 
 
 void serialEvent(Serial p) { 
-  player1In = p.readStringUntil('\t'); 
-  player1 = float(player1In);
+  String serdata= p.readStringUntil('\n');
   
-  player2In = p.readStringUntil('\n'); 
-  player2 = float(player2In);
+ // println(serdata);
+  
+  
+  
+  int n = int(serdata.trim());
+ 
+ //FLIP FLOP BETWEEN TWO PLAYER VALUES!!!
+ if (isNum1 == true) {
+   player1 = n;
+   isNum1 = false;
+   } 
+ else {
+   player2 = n;
+   isNum1 = true;
+ }
+ 
+ 
+ 
+ println(player1);
+ println(player2);
+  
+  //data = split(serdata, '\t');
+  //player1In = data[0];
+  //player2In = data[1];
+  
+  //println(data[0], data[1]);
+  
+  //an array will hold a lot of unnecessary values
+  //data = split(serdata, ',');
+  
+ // player1In = data[0];
+  
+ // data = split(serdata, '/');
+  
+ // player2In = data[1];
+  
+  //loop it around each time
+  
+  
+  //int comma = serdata.indexOf(",");
+  //int star = serdata.indexOf("**");
+  
+  //player1In = serdata.substring(star, comma);
+  //player2In = serdata.substring(comma, star);
+  
+  //player1 = float(player1In);
+  //player2 = float(player2In);
+  
+  //an array will hold a lot of unnecessary values
+  //String[] data = split(serdata, ',');
+  
+  //player1In = data[0];
+  
+  //player2In = data[1];
+  
+  //player1 = float(10);
+  //player2 = float(10);
+  
+  //String player1In = p.readStringUntil(','); 
+  
+  //println(player1);
+  // player1 = float(player1In);
+  //println(player1);
+  
+ //String player2In = p.readStringUntil('/'); 
+ // player2 = float(player2In);
+ // println(player2);
 }
 
 void countDown(){

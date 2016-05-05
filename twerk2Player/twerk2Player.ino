@@ -317,8 +317,8 @@ void getScore(){
 
   //COMMA FOR PLAYER ONE INFO, STARS FOR PLAYER TWO
   //Serial.print("PLAYER ONE");
-  Serial.print(score);
-  Serial.println(",");
+  Serial.println(score);
+  //Serial.print(",");
 
     
   }
@@ -358,10 +358,10 @@ void getScore(){
     score2 = score2 +1;
     }
     
-    //Serial.print("\t");
+   // Serial.print("\t");
     //Serial.print("PLAYER TWO");
     
-   Serial.print(score2);
-    Serial.println("**");
+   Serial.println(score2);
+   // Serial.println(",");
     
   }
