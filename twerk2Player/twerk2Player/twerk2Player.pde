@@ -348,7 +348,7 @@ void draw() {
     
     
     
-    if(player1In != null && player2In != null && player2< 10 && player1 < 10){
+    if(player1 > 0 && player2 > 0){
       continueCount = 1;
       countDown();
  
@@ -361,9 +361,9 @@ void draw() {
    // println("player1" + player1);
    // println("player2" + player2);
 
-    
+    //green player
     if(player1 > 10){
-      fill(240,100,0);
+      fill(40,250,93);
       rectMode(CORNERS);
       
       float rectHeightMath = height-50-player1/3;
@@ -376,8 +376,9 @@ void draw() {
       
     }
     
+    //purple player
     if(player2 > 10){
-      fill(240,100,0);
+      fill(240,70,240);
       rectMode(CORNERS);
       
       float rectHeightMath2 = height-50-player2/3;
@@ -463,8 +464,7 @@ void serialEvent(Serial p) {
   
  // println(serdata);
   
-  
-  
+
   int n = int(serdata.trim());
  
  //FLIP FLOP BETWEEN TWO PLAYER VALUES!!!
@@ -482,57 +482,18 @@ void serialEvent(Serial p) {
  println(player1);
  println(player2);
   
-  //data = split(serdata, '\t');
-  //player1In = data[0];
-  //player2In = data[1];
-  
-  //println(data[0], data[1]);
-  
-  //an array will hold a lot of unnecessary values
-  //data = split(serdata, ',');
-  
- // player1In = data[0];
-  
- // data = split(serdata, '/');
-  
- // player2In = data[1];
-  
-  //loop it around each time
-  
-  
-  //int comma = serdata.indexOf(",");
-  //int star = serdata.indexOf("**");
-  
-  //player1In = serdata.substring(star, comma);
-  //player2In = serdata.substring(comma, star);
-  
-  //player1 = float(player1In);
-  //player2 = float(player2In);
-  
-  //an array will hold a lot of unnecessary values
-  //String[] data = split(serdata, ',');
-  
-  //player1In = data[0];
-  
-  //player2In = data[1];
-  
-  //player1 = float(10);
-  //player2 = float(10);
-  
-  //String player1In = p.readStringUntil(','); 
-  
-  //println(player1);
-  // player1 = float(player1In);
-  //println(player1);
-  
- //String player2In = p.readStringUntil('/'); 
- // player2 = float(player2In);
- // println(player2);
+ 
 }
 
 void countDown(){
-      fill(200, 100, 50);
+      fill(235, 230, 80);
       textSize(100);
-      text(countDown, width/2 + 300, height/2 + 200);
+      //noFill();
+      stroke(10);
+      ellipse(width/2, height/2, 150,150);
+      textMode(CENTER);
+      //dark blue fill
+      fill(50,27,252);
+      text(countDown, width/2-60, height/2+35);
       count --;
 }
