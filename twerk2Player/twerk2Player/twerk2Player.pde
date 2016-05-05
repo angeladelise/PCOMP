@@ -46,6 +46,7 @@ boolean s7;
 boolean s8;
 
 int state;
+int stateChange;
 
 int timer = 0;
 
@@ -108,6 +109,7 @@ void setup() {
   
   frameRate(30);
 
+  stateChange =0;
 }
 
 void draw() {
@@ -117,6 +119,9 @@ void draw() {
     
     //player1In = port.readStringUntil('\n');
     //}
+   
+   
+   println(mouseX, mouseY);
    
 //STATE 0 IS TITLE SCREEN
     if(state == 0){
@@ -137,8 +142,14 @@ void draw() {
       
      
      keyReleased();
+      if(mouseX> 950 && mouseX < 990 && mouseY> 440 && mouseY < 500 && mousePressed){
+        stateChange = 2;
+        
+      }
       
-      
+      if (stateChange == 2){
+      state = 2;
+      }
       
       //println(state);
       
@@ -173,6 +184,13 @@ void draw() {
       
       keyReleased();
       
+      if(mouseX> 20 && mouseX < 60 && mouseY> 440 && mouseY < 500 && mousePressed){
+      stateChange = 1;
+      }
+      
+      if (stateChange == 1){
+      state = 1;
+      }
       
      //choose a song
      if (timer > 30){
@@ -479,8 +497,8 @@ void serialEvent(Serial p) {
  
  
  
- println(player1);
- println(player2);
+ //println(player1);
+ //println(player2);
   
  
 }
