@@ -247,8 +247,8 @@ void loop() {
         getScore2();
         }
 
-      Serial.print("time");
-      Serial.println(timer);
+     // Serial.print("time");
+     // Serial.println(timer);
       
 
 //PRINT OUT VALUES FOR EACH PLAYER!
@@ -315,8 +315,10 @@ void getScore(){
     score = score +1;
     }
 
-  Serial.println("Score*************");
-  Serial.println(score);
+  //COMMA FOR PLAYER ONE INFO, STARS FOR PLAYER TWO
+  //Serial.print("PLAYER ONE");
+  Serial.print(score);
+  Serial.println(",");
 
     
   }
@@ -355,9 +357,11 @@ void getScore(){
     else if (change2 > 100){
     score2 = score2 +1;
     }
-
-    Serial.println("score2*************");
-   Serial.println(score2);
-
+    
+    //Serial.print("\t");
+    //Serial.print("PLAYER TWO");
+    
+   Serial.print(score2);
+    Serial.println("**");
     
   }
