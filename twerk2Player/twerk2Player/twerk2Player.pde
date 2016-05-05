@@ -49,12 +49,15 @@ int state;
 int stateChange;
 
 int timer = 0;
+String displayClock;
 
 PImage title;
 PImage state1;
 PImage state2;
 PImage state3;
 PImage state4;
+PImage state5_1;
+PImage state5_2;
 
 PImage oneD;
 PImage miley;
@@ -100,6 +103,8 @@ void setup() {
   state2 = loadImage("twerk2.png");
   state3 = loadImage("twerk3.png");
   state4 = loadImage("twerk4.png");
+  state5_1 = loadImage("twerk5-1.png");
+  state5_2 = loadImage("twerk5-2.png");
   
   oneD = loadImage("oneDirection.png");
   miley = loadImage("mileyC.png");
@@ -410,14 +415,14 @@ void draw() {
     }
     
    
-    
+   //SINGLE OR TWO PLAYER END OF GAME RESULTS 
     if(count == 0){
-      state = 4;
+      state = 5;
     }
     
   } // end of state 3
   
- //STATE 4 IS RESULTS
+ //STATE 4 IS CELEBRITY RESULTS
  if (state == 4){
    //print results
    image(state4, 0, 0);
@@ -453,7 +458,29 @@ void draw() {
    
  }
  
-
+ 
+ //winner of two player game
+ if(state == 5){
+   if(player1 > player2){
+   image(state5_1, 0,0);
+   
+   if(mousePressed && mouseX> 320 && mouseX < 720 && mouseY > 540 && mouseY < 640){
+       state = 0;
+       }
+       
+   }
+   
+   if(player2> player1){
+   image(state5_2,0,0);
+   
+   if(mousePressed && mouseX> 320 && mouseX < 720 && mouseY > 540 && mouseY < 640){
+       state = 0;
+       }
+       
+   }
+ 
+ }//end of state 5
+ 
 
 }// end of draw
 
@@ -513,6 +540,14 @@ void countDown(){
       textMode(CENTER);
       //dark blue fill
       fill(231, 58, 52);
+   
+      if (countDown < 10){
+      displayClock = "0" + str(countDown);
+      text(displayClock, width/2-60, height/2+35);
+      }
+      else{
       text(countDown, width/2-60, height/2+35);
+      }
+      
       count --;
 }
