@@ -486,14 +486,15 @@ void serialEvent(Serial p) {
 }
 
 void countDown(){
-      fill(235, 230, 80);
+      fill(20, 255, 255);
       textSize(100);
       //noFill();
-      stroke(10);
+      strokeWeight(2);
+     // tint(255, 250);
       ellipse(width/2, height/2, 150,150);
       textMode(CENTER);
       //dark blue fill
-      fill(50,27,252);
+      fill(231, 58, 52);
       text(countDown, width/2-60, height/2+35);
       count --;
 }
