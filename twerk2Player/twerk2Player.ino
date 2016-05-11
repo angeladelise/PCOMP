@@ -97,6 +97,10 @@ int mapping =0;
 float score = 0;
 float score2 =0;
 
+int processingStart;
+int inByte = 0;         // incoming serial byte
+
+
 
 void setup() {
     // join I2C bus (I2Cdev library doesn't do this automatically)
@@ -161,6 +165,14 @@ void setup() {
     score2 = 0; 
 
     timer =0;
+
+//    processingStart = serialRead;
+
+    while (!Serial) {
+      ; // wait for serial port to connect. Needed for native USB port only
+    }
+
+  establishContact();  // send a byte to establish contact until receiver responds
     
 }
 
@@ -230,16 +242,45 @@ void loop() {
         // calculate the average:
         average2 = total2 / numReadings;
 
+    
+     
+     if (Serial.available() > 0) {
+    // get incoming byte:
+    inByte = Serial.read();
+    
+     }
+
+    if (inByte != '0') 
+         { // If 1 was received
+          timer ++;
+         }
+
+//      if (Serial.available()) 
+//        { // If data is available to read,
+//          processingStart = Serial.read(); 
+//          timer++;
+//          }
+          
+//       if (processingStart == '1') 
+//         { // If 1 was received
+//          timer ++;
+//         }
+
+//     //WHEN GET DATA FROM PROCESSING THEN START THE TIMER!
+//        if (processingStart == 1){
+//        timer ++;
+//        }
+
         timer ++;
         
        if(timer == 1000){
         baseline = average;
-        Serial.print("BASELINE*************FOR PLAYER ONE");
-        Serial.println(average);
+        //Serial.print("BASELINE*************FOR PLAYER ONE");
+        //Serial.println(average);
 
         baseline2 = average2;
-        Serial.print("BASELINE**********FOR PLAYER TWO");
-        Serial.println(average2);
+       // Serial.print("BASELINE**********FOR PLAYER TWO");
+       // Serial.println(average2);
         }
 
       if(timer > 1000){
@@ -365,3 +406,12 @@ void getScore(){
    // Serial.println(",");
     
   }
+
+
+
+  void establishContact() {
+  while (Serial.available() <= 0) {
+    Serial.print('A');   // send a capital A
+    delay(300);
+  }
+}

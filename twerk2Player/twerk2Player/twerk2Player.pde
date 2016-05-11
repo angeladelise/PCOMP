@@ -68,6 +68,9 @@ PImage nicki;
 int count = 1800;
 int countDown;
 int continueCount;
+int countStart;
+
+int start;
 
 void setup() {
   port = new Serial(this, "/dev/cu.usbmodem1421", 9600);
@@ -115,6 +118,10 @@ void setup() {
   frameRate(30);
 
   stateChange =0;
+  
+  start = 0;
+  
+  countStart = 0;
 }
 
 void draw() {
@@ -366,12 +373,17 @@ void draw() {
 //STATE 3 IS GAME STATE
   if(state == 3){
     image(state3, 0, 0);
+   
+    //serialEvent(port);
+    start = 1;
+    port.write(start);
+    
     
     countDown = count/30;
     
     
     
-    if(player1 > 0 && player2 > 0){
+    if(countStart == 1){
       continueCount = 1;
       countDown();
  
@@ -522,7 +534,7 @@ void serialEvent(Serial p) {
    isNum1 = true;
  }
  
- 
+ countStart = 1;
  
  //println(player1);
  //println(player2);
